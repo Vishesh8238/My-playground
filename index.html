@@ -779,12 +779,20 @@
     }
     addEventListener('resize', resizeDraw);
     setTimeout(resizeDraw, 10);
+function drawLine(a, b) {
+      if (erase) {
+        dctx.globalCompositeOperation = 'destination-out';
+        dctx.lineWidth = Number(brush.value);
+      } else {
+        dctx.globalCompositeOperation = 'source-over';
+        dctx.strokeStyle = color.value;
+        dctx.lineWidth = Number(brush.value);
+      }
 
-    function drawLine(a,b){
-      dctx.strokeStyle = erase ? '#0000' : color.value;
-      dctx.lineWidth = Number(brush.value);
-      dctx.globalCompositeOperation = erase ? 'destination-out' : 'source-over';
-      dctx.beginPath(); dctx.moveTo(a.x, a.y); dctx.lineTo(b.x, b.y); dctx.stroke();
+      dctx.beginPath();
+      dctx.moveTo(a.x, a.y);
+      dctx.lineTo(b.x, b.y);
+      dctx.stroke();
     }
 
     function pos(e){
@@ -952,3 +960,4 @@
   </script>
 </body>
 </html>
+
